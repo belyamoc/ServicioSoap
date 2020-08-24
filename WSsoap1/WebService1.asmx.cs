@@ -28,9 +28,10 @@ namespace WSsoap1
 		[WebMethod]
 		public DataSet ListaProductos()
 		{
-			SqlConnection cn = new SqlConnection("Data Source=DESKTOP-3K953EF; Initial Catalog=AdventureWorks2014; Integrated Security=true");
-				cn.Open();
-			SqlDataAdapter ad = new SqlDataAdapter("select productid,name,listprice from production.product", cn);
+			SqlConnection conn = new SqlConnection();
+			conn.ConnectionString = "Data Source=.; Initial Catalog=AdventureWorks2014; Integrated Security=true";
+				
+			SqlDataAdapter ad = new SqlDataAdapter("SELECT SUM(UnitPrice * OrderQty) FROM Sales.SalesOrderDetail", conn);
 			DataSet ds = new DataSet();
 			ad.Fill(ds);
 				return ds;
