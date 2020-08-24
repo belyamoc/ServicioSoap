@@ -25,20 +25,17 @@ namespace WSsoap1
 			return "Hola a todos";
 		}
 
+		[WebMethod]
 		public DataSet ListaProductos()
 		{
-			SqlConnection cn = new SqlConnection("Data Source=.; Initial Catalog=AdventureWorks2014; Integrated Security=true");
+			SqlConnection cn = new SqlConnection("Data Source=DESKTOP-3K953EF; Initial Catalog=AdventureWorks2014; Integrated Security=true");
 				cn.Open();
 			SqlDataAdapter ad = new SqlDataAdapter("select productid,name,listprice from production.product", cn);
-			DataSet ds = DataSet();
+			DataSet ds = new DataSet();
 			ad.Fill(ds);
 				return ds;
 		
 		}
 
-		private DataSet DataSet()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
