@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WSsoap1
 {
@@ -21,6 +23,22 @@ namespace WSsoap1
 		public string HelloWorld()
 		{
 			return "Hola a todos";
+		}
+
+		public DataSet ListaProductos()
+		{
+			SqlConnection cn = new SqlConnection("Data Source=.; Initial Catalog=AdventureWorks2014; Integrated Security=true");
+				cn.Open();
+			SqlDataAdapter ad = new SqlDataAdapter("select productid,name,listprice from production.product", cn);
+			DataSet ds = DataSet();
+			ad.Fill(ds);
+				return ds;
+		
+		}
+
+		private DataSet DataSet()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
